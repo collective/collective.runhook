@@ -23,7 +23,7 @@ database (the example above does not):
 ..  code:: python
 
     import transaction
-    transaction commit
+    transaction.commit()
 
 Register your function as a named set'uptools entry point for
 *collective.runhook** in your package's **setup.py**:
