@@ -2,8 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='collective.runhook',
-    version='1.0.0',
-    description="Executes named Plone hook from console",
+    version='0.9.0',
+    description=(
+        'Named instance script run hooks for plone.recipe.zope2instance'
+    ),
     long_description=(open('README.rst').read() + '\n' +
                       open('CHANGES.rst').read()),
     # Get more strings from
@@ -14,7 +16,7 @@ setup(
     keywords='',
     author='Asko Soukka',
     author_email='asko.soukka@iki.fi',
-    url='https://github.com/datakurre/collective.runhook/',
+    url='https://github.com/collective/collective.runhook/',
     license='GPL',
     packages=find_packages('src', exclude=['ez_setup']),
     package_dir={'': 'src'},
