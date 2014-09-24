@@ -1,12 +1,5 @@
-collective.runhook
-==================
-
-Named instance script run hooks for `plone.recipe.zope2instance`_.
-
-.. _plone.recipe.zope2instance: https://pypi.python.org/pypi/plone.recipe.zope2instance
-
-Implement your run hook in your package as a named Python function accepting
-context and request as its arguments:
+Implement your script in some module shipping in your package as a named
+function accepting context and request as its arguments:
 
 ..  code:: python
 
@@ -24,25 +17,26 @@ context and request as its arguments:
             'getRolesInContext': user.getRolesInContext(context)
         })
 
-Remember to include transaction commit when you want to modify the database:
+Remember to include transaction commit when your scripts modifies the
+database (the example above does not):
 
 ..  code:: python
 
     import transaction
     transaction commit
 
-Register your function as a named hook for **collective.runhook** in your
-packages **setup.py** as a setuptools entrypoint:
+Register your function as a named set'uptools entry point for
+*collective.runhook** in your package's **setup.py**:
 
 ..  code:: python
 
     from setuptools import setup
 
     setup(
-        ...
+        # ...
         entry_points="""
         # -*- Entry points: -*-
-        ...
+        # ...
         [collective.runhook]
         whoami = my.package:whoami
         """
@@ -55,17 +49,17 @@ your buildout's instance part:
 
     [buildout]
     parts = instance
-    ...
+    # ...
 
     [instance]
     recipe = plone.recipe.zope2instance
-    ...
+    # ...
     eggs =
         Plone
-        ...
+    #   ...
         collective.runhook
 
-Run the buildout and execute your hook as you wish:
+Run the buildout and execute your script:
 
 ..  code:: bash
 
@@ -92,8 +86,9 @@ the run command:
      'getUserName': 'System Processes',
      'user': "<UnrestrictedUser 'System Processes'>"}
 
-As a bonus, **collective.runhook** can authenticate the hook as a user
-given as ``ZOPE_USER`` environment variable:
+As a bonus, **collective.runhook** can authenticate the script as any existing
+user given with ``ZOPE_USER`` environment variable (but be aware that the
+authentication is only done after ``-O``-traverse):
 
 ..  code:: bash
 

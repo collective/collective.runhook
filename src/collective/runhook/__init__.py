@@ -14,15 +14,18 @@ def get_entrypoint(name):
 
 
 def runhook(self, *args):
-    """Execute named run hooks from installed packages
+    """Execute named script entry points from installed packages
 
-    usage: runhook [hooks]
+    usage: runhook [entry points]
 
     $ bin/instance runhook whoami
+    ...
 
     $ bin/instance -OPlone runhook whoami
+    ...
 
     $ ZOPE_USER=admin bin/instance -OPlone runhook whoami
+    ...
 
     https://pypi.python.org/pypi/collective.runhook
     """
@@ -33,7 +36,7 @@ def runhook(self, *args):
     else:
         hooks = self.options.args[1:]
     if not hooks:
-        print "usage: runhook [hooks]"
+        print "usage: runhook [entry points]"
         return
 
     # Build cmd to call all hooks

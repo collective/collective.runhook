@@ -4,7 +4,7 @@ setup(
     name='collective.runhook',
     version='0.9.1.dev0',
     description=(
-        'Named instance script run hooks for plone.recipe.zope2instance'
+        'Named instance run script entry points for plone.recipe.zope2instance'
     ),
     long_description=(open('README.rst').read() + '\n' +
                       open('CHANGES.rst').read()),
