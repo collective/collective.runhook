@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='collective.runhook',
-    version='0.9.3',
+    version='0.9.4.dev0',
     description=(
         'Named instance run script entry points for plone.recipe.zope2instance'
     ),
