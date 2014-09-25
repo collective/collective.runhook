@@ -9,6 +9,7 @@ function accepting context and request as its arguments:
 
         from pprint import pprint
         pprint({
+            'absolute_url': context.absolute_url(),
             'context': context.__repr__(),
             'user': user.__repr__(),
             'getId': user.getId(),
@@ -65,7 +66,8 @@ Run the buildout and execute your script:
 
     $ bin/instance runhook whoami
     ...
-    {'context': '<Application at >',
+    {'absolute_url': 'http://nohost/Plone',
+     'context': '<Application at >',
      'getId': None,
      'getRoles': ('manage', 'Authenticated'),
      'getRolesInContext': ['manage', 'Authenticated'],
@@ -79,7 +81,8 @@ the run command:
 
     $ bin/instance -OPlone runhook whoami
     ...
-    {'context': '<PloneSite at /Plone>',
+    {'absolute_url': 'http://nohost/Plone',
+     'context': '<PloneSite at /Plone>',
      'getId': None,
      'getRoles': ('manage', 'Authenticated'),
      'getRolesInContext': ['manage', 'Authenticated'],
@@ -94,7 +97,23 @@ authentication is only done after ``-O``-traverse):
 
     $ ZOPE_USER=datakurre bin/instance -OPlone runhook whoami
     ...
-    {'context': '<PloneSite at /Plone>',
+    {'absolute_url': 'http://nohost/Plone',
+     'context': '<PloneSite at /Plone>',
+     'getId': 'datakurre',
+     'getRoles': ['Member', 'Reviewer', 'Site Administrator', 'Authenticated'],
+     'getRolesInContext': ['Member',
+                           'Reviewer',
+                           'Site Administrator',
+                           'Authenticated'],
+     'getUserName': 'datakurre',
+     'user': "<PloneUser 'datakurre'>"}
+
+And we do support URLs with VirtualHostBase:
+
+    $ ZOPE_USER=datakurre bin/instance -O/VirtualHostBase/http://example.com:80/Plone/VirtualHostRoot/Plone runhook whoami
+    ...
+    {'absolute_url': 'http://example.com',
+     'context': '<PloneSite at /Plone>',
      'getId': 'datakurre',
      'getRoles': ['Member', 'Reviewer', 'Site Administrator', 'Authenticated'],
      'getRolesInContext': ['Member',

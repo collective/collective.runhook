@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import csv
+import re
 import os
 import tempfile
 
@@ -95,6 +96,14 @@ import {0:s}
         temp.flush()
         cmdline = self.get_startup_cmd(self.options.python,
                                        'execfile(r\'%s\')' % temp.name)
+        # Add VirtualHostBase support
+        if self.options.object_path:
+            cmdline = re.sub(
+                'restrictedTraverse\([^\)]+', (
+                    'restrictedTraverse(\'/\'.join('
+                    'app.REQUEST.get(\'VirtualRootPhysicalPath\') or '
+                    '[r\'%s\'])' % self.options.object_path
+                ), cmdline)
         self._exitstatus = os.system(cmdline)
 
 
@@ -104,11 +113,11 @@ def whoami(context, request):
 
     from pprint import pprint
     pprint({
+        'absolute_url': context.absolute_url(),
         'context': context.__repr__(),
         'user': user.__repr__(),
         'getId': user.getId(),
         'getUserName': user.getUserName(),
-#       'getDomains': user.getDomains(),
         'getRoles': user.getRoles(),
         'getRolesInContext': user.getRolesInContext(context)
     })
