@@ -4,8 +4,8 @@ Changelog
 0.9.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Add support for VirtualHostMonster URLs
+  [datakurre]
 
 0.9.2 (2014-09-25)
 ------------------
