@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9.2 (unreleased)
+0.9.2 (2014-09-25)
 ------------------
 
 - Fix issue where wrong attribute from entrypoint was read
