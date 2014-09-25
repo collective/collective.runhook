@@ -4,8 +4,8 @@ Changelog
 0.9.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix issue where wrong attribute from entrypoint was read
+  [datakurre]
 
 0.9.1 (2014-09-24)
 ------------------
