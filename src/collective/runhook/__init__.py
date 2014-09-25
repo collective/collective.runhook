@@ -83,10 +83,11 @@ else:
 '''.format(os.environ.get('ZOPE_USER'))
 
     for ep in map(get_entrypoint, hooks):
-        hook += '''\
+        if ep.attrs:
+            hook += '''\
 import {0:s}
 {0:s}.{1:s}(context, request)
-'''.format(ep.module_name, ep.name)
+'''.format(ep.module_name, ep.attrs[0])
 
     # Execute
     with tempfile.NamedTemporaryFile() as temp:
