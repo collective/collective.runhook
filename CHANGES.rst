@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9.4 (unreleased)
+0.9.4 (2014-09-26)
 ------------------
 
 - Fix to print hooks' results (when non-False)
