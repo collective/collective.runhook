@@ -87,7 +87,9 @@ else:
         if ep.attrs:
             hook += '''\
 import {0:s}
-{0:s}.{1:s}(context, request)
+result = {0:s}.{1:s}(context, request)
+if bool(result):
+    print result
 '''.format(ep.module_name, ep.attrs[0])
 
     # Execute
