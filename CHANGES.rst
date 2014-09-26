@@ -4,8 +4,8 @@ Changelog
 0.9.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix to print hooks' results (when non-False)
+  [Asko Soukka]
 
 0.9.3 (2014-09-25)
 ------------------
