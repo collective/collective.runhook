@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9.5 (unreleased)
+0.9.5 (2014-09-28)
 ------------------
 
 - Fix to iterate through all entrypoints with the same name to support multiple
