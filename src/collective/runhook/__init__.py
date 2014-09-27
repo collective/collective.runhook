@@ -44,6 +44,7 @@ def runhook(self, *args):
     if self.options.object_path:
         hook = '''\
 # -*- coding: utf-8 -*-
+from pprint import pprint
 from zope.component.hooks import getSite
 from zope.globalrequest import getRequest
 
@@ -55,6 +56,7 @@ request = getRequest()
     else:
         hook = '''\
 # -*- coding: utf-8 -*-
+from pprint import pprint
 from zope.component.hooks import getSite
 from zope.globalrequest import getRequest
 
@@ -87,9 +89,8 @@ else:
         if ep.attrs:
             hook += '''\
 import {0:s}
-result = {0:s}.{1:s}(context, request)
-if bool(result):
-    print result
+(lambda r={0:s}.{1:s}(context, request): r and pprint(r))()
+
 '''.format(ep.module_name, ep.attrs[0])
 
     # Execute
@@ -112,9 +113,7 @@ if bool(result):
 def whoami(context, request):
     from AccessControl.SecurityManagement import getSecurityManager
     user = getSecurityManager().getUser()
-
-    from pprint import pprint
-    pprint({
+    return {
         'absolute_url': context.absolute_url(),
         'context': context.__repr__(),
         'user': user.__repr__(),
@@ -122,4 +121,4 @@ def whoami(context, request):
         'getUserName': user.getUserName(),
         'getRoles': user.getRoles(),
         'getRolesInContext': user.getRolesInContext(context)
-    })
+    }

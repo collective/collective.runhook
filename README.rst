@@ -6,9 +6,7 @@ function accepting context and request as its arguments:
     def whoami(context, request):
         from AccessControl.SecurityManagement import getSecurityManager
         user = getSecurityManager().getUser()
-
-        from pprint import pprint
-        pprint({
+        return {
             'absolute_url': context.absolute_url(),
             'context': context.__repr__(),
             'user': user.__repr__(),
@@ -16,7 +14,7 @@ function accepting context and request as its arguments:
             'getUserName': user.getUserName(),
             'getRoles': user.getRoles(),
             'getRolesInContext': user.getRolesInContext(context)
-        })
+        }
 
 Remember to include transaction commit when your scripts modifies the
 database (the example above does not):
