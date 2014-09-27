@@ -4,14 +4,17 @@ Changelog
 0.9.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix to iterate through all entrypoints with the same name to support multiple
+  scripts with the same hook name
+  [datakurre]
+- Fix to pprint script return value to not require script to print by itself
+  [datakurre]
 
 0.9.4 (2014-09-26)
 ------------------
 
 - Fix to print hooks' results (when non-False)
-  [Asko Soukka]
+  [datakurre]
 
 0.9.3 (2014-09-25)
 ------------------
