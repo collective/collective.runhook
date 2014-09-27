@@ -7,11 +7,10 @@ import tempfile
 from pkg_resources import iter_entry_points
 
 
-def get_entrypoint(name):
+def iter_entrypoints(name):
     for ep in iter_entry_points('collective.runhook'):
         if ep.name == name:
-            return ep
-    raise KeyError(name)
+            yield ep
 
 
 def runhook(self, *args):
@@ -85,9 +84,10 @@ else:
     raise KeyError('{0:s}')
 '''.format(os.environ.get('ZOPE_USER'))
 
-    for ep in map(get_entrypoint, hooks):
-        if ep.attrs:
-            hook += '''\
+    for entrypoints in map(iter_entrypoints, hooks):
+        for ep in entrypoints:
+            if ep.attrs:
+                hook += '''\
 import {0:s}
 (lambda r={0:s}.{1:s}(context, request): r and pprint(r))()
 
