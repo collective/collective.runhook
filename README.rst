@@ -108,6 +108,8 @@ authentication is only done after ``-O``-traverse):
 
 And we do support URLs with VirtualHostBase:
 
+..  code:: bash
+
     $ ZOPE_USER=datakurre bin/instance -O/VirtualHostBase/http://example.com:80/Plone/VirtualHostRoot/Plone runhook whoami
     ...
     {'absolute_url': 'http://example.com',
